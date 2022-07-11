@@ -43,13 +43,15 @@ public class CreateOrderTest {
         responseForToken.then().assertThat().body("success", equalTo(true)).and().statusCode(200);
         refreshToken = responseForToken.then().extract().path("refreshToken");
         accessToken = responseForToken.then().extract().path("accessToken");
+
     }
 
     @After
-    public void tearDown() {
-        boolean refreshNotNullAndIsEmpty = (refreshToken != null) && (refreshToken.isEmpty());
-        if (refreshNotNullAndIsEmpty) userClient.logout(userLogout);
+    public void tearDown(){
+        user.deleteUser();
     }
+
+
 
     @Test
     @DisplayName("Проверка создания заказа пользователем без авторизации")
@@ -67,6 +69,7 @@ public class CreateOrderTest {
         oderClient = new OrderClient();
         response = oderClient.createOderWithAuthorization(accessToken, oder);
         response.then().assertThat().body("success", equalTo(true)).and().statusCode(200);
+
     }
 
     @Test

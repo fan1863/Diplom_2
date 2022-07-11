@@ -27,9 +27,8 @@ public class UpdateUserTest {
     }
 
     @After
-    public void tearDown() {
-        boolean refreshNotNullAndIsEmpty = (refreshToken != null) && (refreshToken.isEmpty());
-        if (refreshNotNullAndIsEmpty) userClient.logout(userLogout);
+    public void tearDown(){
+        user.deleteUser();
     }
 
     @Test

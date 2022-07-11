@@ -30,4 +30,7 @@ public class User {
         String name = faker.name().firstName();
         return new User(email,password,name);
     }
+
+    public void deleteUser() {
+    }
 }

@@ -11,6 +11,7 @@ import static org.hamcrest.Matchers.equalTo;
 public class UserClient extends RestAssuredClient {
 
     private static final String USER_PATH = "/api/auth/";
+    public String accessToken = "";
 
     @Step("Создать пользователя и зарегистрироваться")
     public Response create(User user) {
@@ -79,5 +80,17 @@ public class UserClient extends RestAssuredClient {
                 .when()
                 .body(user)
                 .patch(USER_PATH + "user");
+    }
+
+    @Step("delete user")
+    public Response deleteUser() {
+        if (this.accessToken != "") {
+            return given()
+                    .spec(getBaseSpec())
+                    .auth().oauth2(accessToken)
+                    .delete("/api/auth/user");
+        }
+        return null;
+    
     }
 }

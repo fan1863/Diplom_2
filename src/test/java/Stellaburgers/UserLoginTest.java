@@ -23,10 +23,8 @@ public class UserLoginTest {
     }
 
     @After
-    public void tearDown() {
-        refreshToken = response.then().extract().path("refreshToken");
-        boolean refreshNotNullAndIsEmpty = (refreshToken != null) && (refreshToken.isEmpty());
-        if (refreshNotNullAndIsEmpty) userClient.logout(userLogout);
+    public void tearDown(){
+        user.deleteUser();
     }
 
     @Test
