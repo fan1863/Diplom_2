@@ -31,20 +31,6 @@ public class UserClient extends RestAssuredClient {
                 .post(USER_PATH + "login");
     }
 
-    @Step("Деавторизация пользователя в системе")
-    public ValidatableResponse logout(UserLogout userLogout) {
-
-        return given()
-                .spec(getBaseSpec())
-                .body(userLogout)
-                .when()
-                .post(USER_PATH + "logout")
-                .then()
-                .assertThat()
-                .statusCode(200)
-                .and()
-                .body("success", equalTo(true));
-    }
 
     @Step("Получение информации о пользователе")
     public ValidatableResponse getDataUser(String accessToken) {

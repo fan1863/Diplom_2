@@ -18,9 +18,7 @@ public class GetOderTest {
     public Order oder;
     public Ingredient allIngredient;
     public IngredientClient ingredientClient;
-    private String refreshToken;
     private String accessToken;
-    public UserLogout userLogout;
     public List<String> ingredients;
     Response response;
 
@@ -37,7 +35,6 @@ public class GetOderTest {
         userClient = new UserClient();
         userClient.create(user);
         Response responseForToken = userClient.login(user);
-        refreshToken = responseForToken.then().extract().path("refreshToken");
         accessToken = responseForToken.then().extract().path("accessToken");
         oder = new Order(ingredients);
         oderClient = new OrderClient();
@@ -46,7 +43,7 @@ public class GetOderTest {
 
     @After
     public void tearDown(){
-        user.deleteUser();
+        userClient.deleteUser();
     }
 
     @Test

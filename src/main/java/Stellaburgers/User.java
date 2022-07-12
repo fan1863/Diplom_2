@@ -31,6 +31,6 @@ public class User {
         return new User(email,password,name);
     }
 
-    public void deleteUser() {
-    }
+
+
 }

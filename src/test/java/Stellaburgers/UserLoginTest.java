@@ -11,8 +11,6 @@ import static org.hamcrest.Matchers.equalTo;
 public class UserLoginTest {
     public UserClient userClient;
     public User user;
-    public String refreshToken;
-    public UserLogout userLogout;
     Response response;
 
     @Before
@@ -24,7 +22,7 @@ public class UserLoginTest {
 
     @After
     public void tearDown(){
-        user.deleteUser();
+        userClient.deleteUser();
     }
 
     @Test

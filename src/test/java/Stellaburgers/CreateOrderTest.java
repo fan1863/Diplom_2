@@ -20,9 +20,7 @@ public class CreateOrderTest {
     public Order oder;
     public Ingredient allIngredient;
     public IngredientClient ingredientClient;
-    private String refreshToken;
     private String accessToken;
-    public UserLogout userLogout;
     public List<String> ingredients;
     Response response;
 
@@ -41,17 +39,14 @@ public class CreateOrderTest {
         userClient.create(user);
         Response responseForToken = userClient.login(user);
         responseForToken.then().assertThat().body("success", equalTo(true)).and().statusCode(200);
-        refreshToken = responseForToken.then().extract().path("refreshToken");
         accessToken = responseForToken.then().extract().path("accessToken");
 
     }
 
     @After
     public void tearDown(){
-        user.deleteUser();
+        userClient.deleteUser();
     }
-
-
 
     @Test
     @DisplayName("Проверка создания заказа пользователем без авторизации")

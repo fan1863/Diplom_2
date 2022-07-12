@@ -13,22 +13,19 @@ public class UpdateUserTest {
     Faker faker = new Faker();
     public UserClient userClient;
     public User user;
-    private String refreshToken;
     private String accessToken;
-    public UserLogout userLogout;
 
     @Before
     public void setUp() {
         userClient = new UserClient();
         user = User.getRandomUser();
         Response response = userClient.create(user);
-        refreshToken = response.then().extract().path("refreshToken");
         accessToken = response.then().extract().path("accessToken");
     }
 
     @After
     public void tearDown(){
-        user.deleteUser();
+        userClient.deleteUser();
     }
 
     @Test
